@@ -113,9 +113,10 @@ const data = [
 
 */
 
-const createArticle = (title, date, firstP, secondP, thirdP) => {
+function createArticle(data) {
 	
 	// Create the Elements
+	const articles = document.querySelector('.articles')
 	const article = document.createElement('div');
 	const articleTitle = document.createElement('h2');
 	const articleDate = document.createElement('p');
@@ -125,6 +126,7 @@ const createArticle = (title, date, firstP, secondP, thirdP) => {
 	const button = document.createElement('span');
 	
 	// Append the Elements
+	articles.appendChild(article);
 	article.appendChild(articleTitle);
 	article.appendChild(articleDate);
 	article.appendChild(articleP1);
@@ -133,21 +135,20 @@ const createArticle = (title, date, firstP, secondP, thirdP) => {
 	article.appendChild(button);
 	
 	// Set Class Names
-	const open = document.querySelector('.article-open')
 	article.classList.add('article');
 	articleDate.classList.add('date');
 	button.classList.add('expandButton');
 	
 	// Add Content
-	articleTitle.textContent = title;
-	articleDate.textContent = date;
-	articleP1.textContent = firstP;
-	articleP2.textContent = secondP;
-	articlep3.textContent = thirdP;
+	articleTitle.textContent = data.title;
+	articleDate.textContent = data.date;
+	articleP1.textContent = data.firstParagraph;
+	articleP2.textContent = data.secondParagraph;
+	articlep3.textContent = data.thirdParagraph;
 	
 	// add event handler
-	button.addEventListener('click', ('.article-open') => {
-		article.classList.toggle('toggle-on')
+	button.addEventListener('click', (event) => {
+		article.classList.toggle('.article-open')
 		});
 	
 	return article; // returns the article
@@ -155,9 +156,8 @@ const createArticle = (title, date, firstP, secondP, thirdP) => {
 
 const articles = document.querySelector('.articles');
 
-data.map(info => {
-	articles.appendChild(info.title, info.date, info.firstParagraph, info.secondParagraph, info.thirdParagraph);
-	return info;
+data.forEach(data => {
+	articles.appendChild(createArticle(data));
 });
 
 
